@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BloodNet Bangladesh — Every Drop. Connected.</title>
+<meta name="description" content="BloodNet Bangladesh is a proposed nationwide platform connecting blood recipients, voluntary donors and hospital blood banks. Segment 1 prototype with fictional sample data.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="bloodnet.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- ============================ icon sprite ============================ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <g id="s" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></g>
+  </defs>
+  <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3.2s-6.6 7-6.6 11a6.6 6.6 0 0 0 13.2 0c0-4-6.6-11-6.6-11Z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></symbol>
+  <symbol id="i-hospital" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V8.5L12 4l8 4.5V21"/><path d="M3 21h18"/><path d="M12 9.5v5M9.5 12h5"/><path d="M9.5 21v-4h5v4"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M4.6 20a7.4 7.4 0 0 1 14.8 0"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4.5 2.8 20h18.4L12 4.5Z"/><path d="M12 10v4"/><path d="M12 17.2h.01"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17M8 3.5v3M16 3.5v3"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 3.5h3l1.5 4-2 1.4a11.5 11.5 0 0 0 5.4 5.4l1.4-2 4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.2 5.7a2 2 0 0 1 2-2.2Z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="m3.6 7 8.4 6 8.4-6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-verified" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2 19.5 6v6c0 4.2-3 7.4-7.5 8.8C7.5 19.4 4.5 16.2 4.5 12V6L12 3.2Z"/><path d="m9 12 2.2 2.2L15.2 10"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+  <symbol id="i-chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9.5 5.5 7 6.5-7 6.5"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10" width="15" height="10" rx="2"/><path d="M8 10V7.5a4 4 0 0 1 8 0V10"/></symbol>
+  <symbol id="i-id" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M5.8 15.8a3.6 3.6 0 0 1 6.4 0M14.5 10h4M14.5 13.5h4"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.4"/><path d="M12 7.5V12l3 1.8"/></symbol>
+  <symbol id="i-network" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.4"/><circle cx="5" cy="18" r="2.4"/><circle cx="19" cy="18" r="2.4"/><path d="M10.8 7.2 6.2 15.8M13.2 7.2l4.6 8.6M7.4 18h9.2"/></symbol>
+  <symbol id="i-filter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16l-6.2 7.3V19l-3.6-2v-3.7L4 6Z"/></symbol>
+  <symbol id="i-whatsapp" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5a8.4 8.4 0 0 0-7.2 12.7L3.5 20.5l4.5-1.2A8.4 8.4 0 1 0 12 3.5Z"/><path d="M8.7 8.3c.2-.5.5-.5.8-.5h.5c.2 0 .4 0 .6.4.2.5.7 1.6.7 1.8s0 .3-.2.5l-.4.5c-.1.2-.2.3 0 .6.2.3.8 1.1 1.6 1.8 1.1 1 1.9 1.2 2.2 1.4.3.1.5.1.6-.1l.6-.7c.2-.3.4-.2.6-.1l1.5.7c.2.1.3.2.4.3 0 .2 0 .9-.3 1.4-.3.6-1.5 1.1-2.1 1.1-.5 0-1.9-.2-3.7-1.6-2.2-1.7-3.4-3.7-3.6-4.1-.2-.4-1.1-1.5-1.1-2.9 0-1.4.7-2 1-2.3Z" fill="currentColor" stroke="none"/></symbol>
+</svg>
+
+<!-- ============================== header ============================== -->
+<header class="site-header">
+  <div class="wrap header-bar">
+    <a class="brand" href="#/home" aria-label="BloodNet Bangladesh, home">
+      <svg class="brand__mark" viewBox="0 0 32 34" aria-hidden="true">
+        <path d="M16 2.2C16 2.2 4.6 14 4.6 21.2a11.4 11.4 0 0 0 22.8 0C27.4 14 16 2.2 16 2.2Z" fill="#B8173A" stroke="#FFF8F2" stroke-width="1.5"/>
+        <path d="M16 13.2 10.9 21.4M16 13.2l5.1 8.2M10.9 21.4h10.2" stroke="#F4CDD5" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="16" cy="13.2" r="2.7" fill="#FFF8F2"/>
+        <circle cx="10.9" cy="21.4" r="2.1" fill="#FFF8F2"/>
+        <circle cx="21.1" cy="21.4" r="2.1" fill="#FFF8F2"/>
+      </svg>
+      <span class="brand__name">BloodNet<span>BANGLADESH</span></span>
+    </a>
+
+    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
+      <svg class="ico" aria-hidden="true"><use href="#i-menu"></use></svg>
+    </button>
+
+    <nav class="nav" id="primary-nav" aria-label="Main">
+      <a class="nav__link" href="#/home">Home</a>
+      <a class="nav__link" href="#/hospitals">Hospitals</a>
+      <a class="nav__link" href="#/donors">Donors</a>
+      <a class="nav__link" href="#/emergency">Emergency</a>
+      <a class="nav__link" href="#/register">Register as donor</a>
+      <a class="nav__link" href="#/contact">Help Center</a>
+      <a class="btn btn--sm nav__cta" href="#/donors">Find blood</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============================== ticker ============================== -->
+<div class="ticker" aria-label="Active emergency requests">
+  <div class="wrap ticker__inner">
+    <span class="ticker__tag"><svg class="ico ico--sm" aria-hidden="true"><use href="#i-alert"></use></svg>URGENT</span>
+    <div class="ticker__viewport"><div class="ticker__track" id="ticker-track"></div></div>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- ================================================================== -->
+<!-- VIEW 01 — HOME                                                      -->
+<!-- ================================================================== -->
+<section class="view" data-view="home" aria-label="Home">
+
+  <div class="hero">
+    <svg class="hero__net" viewBox="0 0 1200 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <g stroke="#F4CDD5" stroke-width="1" opacity=".22" fill="none">
+        <path d="M60 430 210 300 380 360 520 210 700 260 860 150 1030 240 1160 120"/>
+        <path d="M210 300 380 120 520 210M700 260 760 430 860 150M1030 240 1080 420"/>
+        <path d="M60 430 180 500 380 360M520 210 560 90"/>
+      </g>
+      <g fill="#F4CDD5" opacity=".38">
+        <circle cx="210" cy="300" r="3.5"/><circle cx="380" cy="360" r="3"/><circle cx="520" cy="210" r="4"/>
+        <circle cx="700" cy="260" r="3"/><circle cx="860" cy="150" r="3.5"/><circle cx="1030" cy="240" r="3"/>
+        <circle cx="380" cy="120" r="2.5"/><circle cx="760" cy="430" r="3"/><circle cx="60" cy="430" r="3"/>
+        <circle cx="1160" cy="120" r="2.5"/><circle cx="560" cy="90" r="2.5"/><circle cx="1080" cy="420" r="2.5"/>
+      </g>
+    </svg>
+
+    <div class="wrap hero__grid">
+      <div>
+        <h1>Find the blood you need, when you need it.</h1>
+        <p class="hero__lede">BloodNet connects recipients, voluntary donors and hospital blood banks in one location-aware network — instead of scattered posts, phone calls and personal contacts.</p>
+        <ul class="hero__points">
+          <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-pin"></use></svg><span>Search down to your own local area: district, upazila, then area.</span></li>
+          <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-clock"></use></svg><span>See who is actually available, based on their last donation date.</span></li>
+          <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-verified"></use></svg><span>Check hospital blood stock with the date each record was last verified.</span></li>
+        </ul>
+      </div>
+      <div class="hero__aside">
+        <div class="hero__stat"><b>18</b><span>sample donor records</span></div>
+        <div class="hero__stat"><b>5</b><span>hospital blood banks publishing stock</span></div>
+        <div class="hero__stat"><b>3</b><span>active blood requests on the board</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- search console -->
+  <div class="wrap">
+    <form class="console" id="home-search-form">
+      <div class="console__head">
+        <h2 class="console__title">Search donors near you</h2>
+        <span class="console__note">SAMPLE PROTOTYPE DATA</span>
+      </div>
+
+      <div class="console__body">
+        <div>
+          <div class="cascade">
+            <div class="field">
+              <label class="field__label" for="home-district">DISTRICT</label>
+              <select class="select" id="home-district"></select>
+            </div>
+            <div class="cascade__arrow"><svg class="ico ico--sm" aria-hidden="true"><use href="#i-chevron-right"></use></svg></div>
+            <div class="field">
+              <label class="field__label" for="home-upazila">UPAZILA</label>
+              <select class="select" id="home-upazila"></select>
+            </div>
+            <div class="cascade__arrow"><svg class="ico ico--sm" aria-hidden="true"><use href="#i-chevron-right"></use></svg></div>
+            <div class="field">
+              <label class="field__label" for="home-area">LOCAL AREA</label>
+              <select class="select" id="home-area"></select>
+            </div>
+          </div>
+
+          <div class="field groupbox">
+            <span class="field__label" id="home-group-label">BLOOD GROUP</span>
+            <div class="chips" id="home-groups" role="radiogroup" aria-labelledby="home-group-label"></div>
+          </div>
+        </div>
+
+        <div class="console__side">
+          <a class="btn btn--outline" href="#/hospitals">
+            <svg class="ico ico--sm" aria-hidden="true"><use href="#i-hospital"></use></svg>Check hospital stock</a>
+          <a class="btn btn--outline" href="#/emergency">
+            <svg class="ico ico--sm" aria-hidden="true"><use href="#i-alert"></use></svg>Post emergency request</a>
+        </div>
+      </div>
+
+      <div class="console__foot">
+        <p class="console__count" id="home-count"></p>
+        <div class="console__actions">
+          <button class="btn" type="submit"><span class="btn__spinner"></span>Find donor</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- emergency preview -->
+  <div class="section section--tight">
+    <div class="wrap">
+      <div class="section-head section-head--split">
+        <div>
+          <h2>Requests waiting for a donor</h2>
+          <p>Posted through the emergency portal. Critical requests are listed first.</p>
+        </div>
+        <a class="linkline" href="#/emergency">Open the emergency portal
+          <svg class="ico ico--sm" aria-hidden="true"><use href="#i-chevron-right"></use></svg></a>
+      </div>
+      <div class="req-grid" id="home-requests"></div>
+    </div>
+  </div>
+
+  <!-- how it works -->
+  <div class="section section--tinted">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Three steps from search to contact</h2>
+        <p>The whole journey is built so that someone under time pressure reaches a usable answer in as few steps as possible.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <h3>Narrow to your area</h3>
+          <p>Pick district, upazila and local area, then a blood group. Filtering by location first removes results that are too far away to help today.</p>
+        </div>
+        <div class="step">
+          <h3>Check who is available</h3>
+          <p>Every donor carries an availability status derived from their last donation date, so nobody wastes calls on a donor inside the cooldown period.</p>
+        </div>
+        <div class="step">
+          <h3>Contact, or post a request</h3>
+          <p>Open a profile to reach the donor. If no one nearby matches, post an emergency request and check hospital blood-bank stock in the same place.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- what stays visible -->
+  <div class="section section--dark">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>What the platform keeps visible</h2>
+        <p>Location, availability and urgency drive every screen. These are the fields the system surfaces so a decision can be made quickly.</p>
+      </div>
+      <div class="req-grid">
+        <div>
+          <ul class="hero__points">
+            <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-drop"></use></svg><span>Blood group and the units required</span></li>
+            <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-calendar"></use></svg><span>Last donation date and next possible availability</span></li>
+            <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-user"></use></svg><span>Available or unavailable, never left ambiguous</span></li>
+          </ul>
+        </div>
+        <div>
+          <ul class="hero__points">
+            <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-hospital"></use></svg><span>Hospital blood-bank units by group</span></li>
+            <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-verified"></use></svg><span>The date each stock record was last verified</span></li>
+            <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-alert"></use></svg><span>Urgent and upcoming requirements on one board</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="u-row u-mt5">
+        <a class="btn" href="#/register">Register as a donor</a>
+        <a class="btn btn--onDark" href="#/donors">Browse the donor directory</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================== -->
+<!-- VIEW 02 — DONOR DIRECTORY                                           -->
+<!-- ================================================================== -->
+<section class="view" data-view="donors" aria-label="Donor directory">
+  <div class="page-head">
+    <div class="wrap">
+      <h1>Area-wise donor directory</h1>
+      <p>Filter registered donors by location, blood group and availability. Available donors are listed first.</p>
+      <div class="page-head__meta">
+        <span>FICTIONAL DEMO INFORMATION</span>
+        <span>PROTOTYPE DATE · <span data-today></span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section section--tight">
+    <div class="wrap">
+      <div class="filters">
+        <div class="filters__row">
+          <div class="field">
+            <label class="field__label" for="f-q">SEARCH</label>
+            <div class="search-input">
+              <svg class="ico ico--sm" aria-hidden="true"><use href="#i-search"></use></svg>
+              <input class="input" id="f-q" type="search" placeholder="Donor name or area…" autocomplete="off">
+            </div>
+          </div>
+          <div class="field">
+            <label class="field__label" for="f-district">DISTRICT</label>
+            <select class="select" id="f-district"></select>
+          </div>
+          <div class="field">
+            <label class="field__label" for="f-upazila">UPAZILA</label>
+            <select class="select" id="f-upazila"></select>
+          </div>
+        </div>
+        <div class="filters__row">
+          <div class="field">
+            <label class="field__label" for="f-area">LOCAL AREA</label>
+            <select class="select" id="f-area"></select>
+          </div>
+          <div class="field">
+            <label class="field__label" for="f-group">BLOOD GROUP</label>
+            <select class="select" id="f-group"></select>
+          </div>
+          <div class="field">
+            <label class="field__label" for="f-avail">AVAILABILITY</label>
+            <select class="select" id="f-avail">
+              <option value="All">Any status</option>
+              <option value="Available">Available now</option>
+              <option value="Unavailable">In cooldown</option>
+            </select>
+          </div>
+        </div>
+        <div class="filters__foot">
+          <p class="result-count" id="donor-count"></p>
+          <button class="btn-reset" type="button" id="f-reset">Clear all filters</button>
+        </div>
+      </div>
+
+      <div class="donor-list" id="donor-list"></div>
+
+      <div class="notice notice--plain u-mt4">
+        <svg class="ico" aria-hidden="true"><use href="#i-lock"></use></svg>
+        <span>Contact details are masked in the directory and released only from a donor profile. In a live system that release would depend on sign-in and the donor's own consent settings.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================== -->
+<!-- VIEW 03 — HOSPITAL BLOOD BANKS                                      -->
+<!-- ================================================================== -->
+<section class="view" data-view="hospitals" aria-label="Hospital blood banks">
+  <div class="page-head">
+    <div class="wrap">
+      <h1>Hospital blood-bank stock</h1>
+      <p>One directory for individual hospital inventories, each record carrying the date it was last verified so you can judge how recent it is.</p>
+      <div class="page-head__meta">
+        <span>SAMPLE PROTOTYPE DATA — NOT LIVE STOCK</span>
+        <span>PROTOTYPE DATE · <span data-today></span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section section--tight">
+    <div class="wrap">
+      <div class="notice u-mb3">
+        <svg class="ico" aria-hidden="true"><use href="#i-alert"></use></svg>
+        <span><b>These are fictional prototype records.</b> Hospital names, unit counts and verification dates are invented for Segment 1. Always telephone the hospital before travelling.</span>
+      </div>
+
+      <div class="filters">
+        <div class="filters__row">
+          <div class="field">
+            <label class="field__label" for="h-q">SEARCH</label>
+            <div class="search-input">
+              <svg class="ico ico--sm" aria-hidden="true"><use href="#i-search"></use></svg>
+              <input class="input" id="h-q" type="search" placeholder="Hospital or area…" autocomplete="off">
+            </div>
+          </div>
+          <div class="field">
+            <label class="field__label" for="h-district">DISTRICT</label>
+            <select class="select" id="h-district"></select>
+          </div>
+          <div class="field">
+            <label class="field__label" for="h-group">BLOOD GROUP</label>
+            <select class="select" id="h-group"></select>
+          </div>
+          <div class="field">
+            <label class="field__label" for="h-status">STOCK STATUS</label>
+            <select class="select" id="h-status">
+              <option value="All">Any status</option>
+              <option value="instock">In stock</option>
+              <option value="low">Low</option>
+              <option value="out">Out</option>
+            </select>
+          </div>
+        </div>
+        <div class="filters__foot">
+          <p class="result-count" id="stock-count"></p>
+          <button class="btn-reset" type="button" id="h-reset">Clear all filters</button>
+        </div>
+      </div>
+
+      <div id="stock-empty" hidden></div>
+
+      <div class="panel panel--flush only-desktop u-mt3" id="stock-table-wrap">
+        <div class="table-scroll">
+          <table class="table">
+            <caption class="sr-only">Hospital blood stock by blood group</caption>
+            <thead>
+              <tr>
+                <th scope="col">HOSPITAL</th>
+                <th scope="col">AREA</th>
+                <th scope="col">GROUPS</th>
+                <th scope="col">TOTAL UNITS</th>
+                <th scope="col">STATUS</th>
+                <th scope="col">LAST VERIFIED</th>
+              </tr>
+            </thead>
+            <tbody id="stock-body"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="stock-cards u-mt3" id="stock-cards"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================== -->
+<!-- VIEW 04 — EMERGENCY REQUEST PORTAL                                  -->
+<!-- ================================================================== -->
+<section class="view" data-view="emergency" aria-label="Emergency request portal">
+  <div class="page-head">
+    <div class="wrap">
+      <h1>Emergency blood requests</h1>
+      <p>Post a requirement so that nearby donors and hospitals can see it, then track it on the active board below.</p>
+      <div class="page-head__meta">
+        <span>SAMPLE PROTOTYPE DATA</span>
+        <span>PROTOTYPE DATE · <span data-today></span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section section--tight">
+    <div class="wrap">
+      <div class="form-layout">
+        <div>
+          <div class="panel" id="emergency-form-card">
+            <h2 class="panel__title">Post an emergency request</h2>
+            <p class="panel__intro">All fields are required. Nothing is sent anywhere — submissions stay in this prototype session.</p>
+
+            <div class="form-status" id="emergency-status" role="alert" aria-live="assertive"></div>
+
+            <form id="emergency-form" novalidate class="u-mt4">
+              <div class="form-grid">
+                <div class="field span-2">
+                  <label class="field__label" for="e-requester">REQUESTER NAME <span class="req">*</span></label>
+                  <input class="input" id="e-requester" type="text" autocomplete="name" placeholder="Who should the donor ask for?">
+                  <p class="field__error" role="alert"></p>
+                </div>
+                <div class="field">
+                  <label class="field__label" for="e-group">BLOOD GROUP <span class="req">*</span></label>
+                  <select class="select" id="e-group"></select>
+                  <p class="field__error" role="alert"></p>
+                </div>
+                <div class="field">
+                  <label class="field__label" for="e-units">UNITS NEEDED <span class="req">*</span></label>
+                  <input class="input" id="e-units" type="number" min="1" max="10" step="1" placeholder="e.g. 2">
+                  <p class="field__error" role="alert"></p>
+                </div>
+                <div class="field">
+                  <label class="field__label" for="e-date">REQUIRED BY <span class="req">*</span></label>
+                  <input class="input" id="e-date" type="date">
+                  <p class="field__error" role="alert"></p>
+                </div>
+                <div class="field">
+                  <label class="field__label" for="e-urgency">URGENCY <span class="req">*</span></label>
+                  <select class="select" id="e-urgency"></select>
+                  <p class="field__error" role="alert"></p>
+                </div>
+                <div class="field span-2">
+                  <label class="field__label" for="e-hospital">HOSPITAL <span class="req">*</span></label>
+                  <select class="select" id="e-hospital"></select>
+                  <p class="field__error" role="alert"></p>
+                </div>
+                <div class="field">
+                  <label class="field__label" for="e-area">EXACT AREA <span class="req">*</span></label>
+                  <input class="input" id="e-area" type="text" placeholder="e.g. Boalkhali Sadar">
+                  <p class="field__error" role="alert"></p>
+                </div>
+                <div class="field">
+                  <label class="field__label" for="e-contact">CONTACT NUMBER <span class="req">*</span></label>
+                  <input class="input" id="e-contact" type="tel" inputmode="tel" placeholder="01XXX-XXXXXX">
+                  <p class="field__hint">Use the demo value 01XXX-XXXXXX, or any 11-digit number.</p>
+                  <p class="field__error" role="alert"></p>
+                </div>
+              </div>
+
+              <div class="u-row u-mt4">
+                <button class="btn btn--alert" type="submit" id="emergency-submit">
+                  <span class="btn__spinner"></span>Submit emergency request</button>
+                <a class="btn btn--outline" href="#/donors">Search donors instead</a>
+              </div>
+            </form>
+          </div>
+
+          <div class="success" id="emergency-success" hidden>
+            <div class="success__mark"><svg class="ico" aria-hidden="true"><use href="#i-check"></use></svg></div>
+            <h3>Request posted</h3>
+            <p>It now appears at the top of the active board below, sorted by urgency. In the live system, matching donors in the same area would be notified.</p>
+            <div class="success__card" id="emergency-success-card"></div>
+            <div class="success__actions">
+              <button class="btn btn--outline" type="button" id="emergency-another">Post another request</button>
+              <a class="btn" href="#/donors">Find matching donors</a>
+            </div>
+          </div>
+        </div>
+
+        <aside class="aside-card">
+          <h3>How urgency is read</h3>
+          <p>The label sets where a request sits on the board and how prominently it is shown.</p>
+          <div class="aside-card__rule"></div>
+          <dl class="dl dl--single aside-def">
+            <div><dt>CRITICAL</dt><dd>Needed within roughly 24 hours. Shown first, with the alert colour.</dd></div>
+            <div><dt>URGENT</dt><dd>Needed within a few days. Highlighted, but below critical requests.</dd></div>
+            <div><dt>PLANNED</dt><dd>A scheduled requirement, such as surgery, posted early to gather donors.</dd></div>
+          </dl>
+          <div class="aside-card__rule"></div>
+          <p class="aside-note">This prototype has no backend. Submitted requests live in the browser session and disappear on reload.</p>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <div class="section section--tinted">
+    <div class="wrap">
+      <div class="section-head section-head--split">
+        <div>
+          <h2>Active requests</h2>
+          <p class="result-count u-mt2" id="request-count"></p>
+        </div>
+
+
+
+
+
+
+
+        
+      </div>
+      <div class="req-grid" id="request-list"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================== -->
+<!-- VIEW 05 — DONOR REGISTRATION                                        -->
+<!-- ================================================================== -->
+<section class="view" data-view="register" aria-label="Donor registration">
+  <div class="page-head">
+    <div class="wrap">
+      <h1>Register as a donor</h1>
+      <p>One short form adds you to the area-wise directory. Your last donation date sets the availability status other users see.</p>
+      <div class="page-head__meta">
+        <span>PROTOTYPE FORM — NO DATA IS STORED</span>
+        <span>PROTOTYPE DATE · <span data-today></span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section section--tight">
+    <div class="wrap">
+      <div class="form-layout">
+        <div>
+          <div class="panel" id="register-form-card">
+            <div class="form-status" id="register-status" role="alert" aria-live="assertive"></div>
+
+            <form id="register-form" novalidate>
+              <fieldset class="fieldset">
+                <legend class="fieldset__legend">Personal details</legend>
+                <div class="fieldset__body form-grid">
+                  <div class="field">
+                    <label class="field__label" for="r-name">FULL NAME <span class="req">*</span></label>
+                    <input class="input" id="r-name" type="text" autocomplete="name" placeholder="e.g. Rifat Hasan">
+                    <p class="field__error" role="alert"></p>
+                  </div>
+                  <div class="field">
+                    <label class="field__label" for="r-group">BLOOD GROUP <span class="req">*</span></label>
+                    <select class="select" id="r-group"></select>
+                    <p class="field__error" role="alert"></p>
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset class="fieldset">
+                <legend class="fieldset__legend">Location</legend>
+                <div class="fieldset__body form-grid">
+                  <div class="field">
+                    <label class="field__label" for="r-district">DISTRICT <span class="req">*</span></label>
+                    <select class="select" id="r-district"></select>
+                    <p class="field__error" role="alert"></p>
+                  </div>
+                  <div class="field">
+                    <label class="field__label" for="r-upazila">UPAZILA <span class="req">*</span></label>
+                    <select class="select" id="r-upazila"></select>
+                    <p class="field__error" role="alert"></p>
+                  </div>
+                  <div class="field span-2">
+                    <label class="field__label" for="r-area">LOCAL AREA <span class="req">*</span></label>
+                    <select class="select" id="r-area"></select>
+                    <p class="field__hint">Recipients search at area level first, so this is what makes you findable.</p>
+                    <p class="field__error" role="alert"></p>
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset class="fieldset">
+                <legend class="fieldset__legend">Contact</legend>
+                <div class="fieldset__body form-grid">
+                  <div class="field">
+                    <label class="field__label" for="r-mobile">MOBILE <span class="req">*</span></label>
+                    <input class="input" id="r-mobile" type="tel" inputmode="tel" placeholder="01XXX-XXXXXX">
+                    <p class="field__error" role="alert"></p>
+                  </div>
+                  <div class="field">
+                    <label class="field__label" for="r-email">EMAIL <span class="req">*</span></label>
+                    <input class="input" id="r-email" type="email" autocomplete="email" placeholder="name@example.com">
+                    <p class="field__error" role="alert"></p>
+                  </div>
+                  <div class="field span-2">
+                    <label class="field__label" for="r-emergency">EMERGENCY CONTACT <span class="req">*</span></label>
+                    <input class="input" id="r-emergency" type="tel" inputmode="tel" placeholder="01XXX-XXXXXX">
+                    <p class="field__hint">Someone who can be reached if you cannot be. Use the demo value 01XXX-XXXXXX for testing.</p>
+                    <p class="field__error" role="alert"></p>
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset class="fieldset">
+                <legend class="fieldset__legend">Donation history</legend>
+                <div class="fieldset__body form-grid">
+                  <div class="field span-2">
+                    <label class="field__label" for="r-last">LAST DONATION DATE</label>
+                    <input class="input" id="r-last" type="date">
+                    <p class="field__hint">Leave blank if you have never donated. This date drives your availability status.</p>
+                    <p class="field__error" role="alert"></p>
+                  </div>
+                </div>
+              </fieldset>
+
+              <button class="btn btn--block" type="submit" id="register-submit">
+                <span class="btn__spinner"></span>Register as donor</button>
+            </form>
+          </div>
+
+          <div class="success" id="register-success" hidden>
+            <div class="success__mark"><svg class="ico" aria-hidden="true"><use href="#i-check"></use></svg></div>
+            <h3>You are on the directory</h3>
+            <p id="register-success-note"></p>
+            <div class="success__card" id="register-success-card"></div>
+            <div class="success__actions">
+              <a class="btn" href="#/donors">View the directory</a>
+              <button class="btn btn--outline" type="button" id="register-again">Register someone else</button>
+            </div>
+          </div>
+        </div>
+
+        <aside class="aside-card">
+          <h3>Your availability, calculated</h3>
+          <p>BloodNet marks a donor unavailable for three months after a recorded donation and shows the next possible date.</p>
+          <div class="cooldown">
+            <div id="cooldown-rows"></div>
+          </div>
+          <div class="aside-card__rule"></div>
+          <div class="notice notice--plain">
+            <svg class="ico" aria-hidden="true"><use href="#i-alert"></use></svg>
+            <span>The three-month cooldown is <b>proposed project logic, not medical clearance.</b> Final donor eligibility must be confirmed by qualified healthcare professionals.</span>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ================================================================== -->
+<!-- VIEW 06 — CONTACT / HELP CENTER                                     -->
+<!-- ================================================================== -->
+<section class="view" data-view="contact" aria-label="Contact us">
+  <div class="page-head">
+    <div class="wrap">
+      <h1>Contact us</h1>
+      <p>Have a question about BloodNet, or need help using the platform? Reach us directly below.</p>
+      <div class="page-head__meta">
+        <span>SUPPORT — SAMPLE PROTOTYPE CONTACT DETAILS</span>
+        <span>PROTOTYPE DATE · <span data-today></span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section section--tight">
+    <div class="wrap">
+      <div class="contact-card">
+        <div class="contact-card__mark">
+          <svg class="ico" aria-hidden="true"><use href="#i-mail"></use></svg>
+        </div>
+        <h2>Get in touch</h2>
+        <p>Always within your reach.</p>
+
+        <div class="contact-grid">
+          <a class="contact-tile" href="tel:+8801829510725">
+            <span class="contact-tile__icon"><svg class="ico" aria-hidden="true"><use href="#i-phone"></use></svg></span>
+            <span class="contact-tile__label">CALL US</span>
+            <span class="contact-tile__value">+880 1829-510725</span>
+          </a>
+          <a class="contact-tile" href="https://wa.me/8801829510725" target="_blank" rel="noopener">
+            <span class="contact-tile__icon"><svg class="ico" aria-hidden="true"><use href="#i-whatsapp"></use></svg></span>
+            <span class="contact-tile__label">WHATSAPP</span>
+            <span class="contact-tile__value">+880 1829-510725</span>
+          </a>
+          <a class="contact-tile" href="mailto:tajinsultana698@gmail.com">
+            <span class="contact-tile__icon"><svg class="ico" aria-hidden="true"><use href="#i-mail"></use></svg></span>
+            <span class="contact-tile__label">EMAIL</span>
+            <span class="contact-tile__value">tajinsultana698@gmail.com</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ========================= donor profile modal ====================== -->
+<div class="modal" id="donor-modal" role="dialog" aria-modal="true" aria-labelledby="modal-name">
+  <div class="modal__backdrop"></div>
+  <div class="modal__dialog">
+    <button class="modal__close" id="modal-close" aria-label="Close donor profile">
+      <svg class="ico" aria-hidden="true"><use href="#i-close"></use></svg>
+    </button>
+
+    <div class="modal__head">
+      <span class="bg-mark bg-mark--lg" id="modal-group"></span>
+      <div>
+        <h2 id="modal-name" class="modal__name"></h2>
+        <p class="modal__loc" id="modal-loc"></p>
+        <p class="u-mt2"><span class="badge" id="modal-status"></span></p>
+      </div>
+    </div>
+
+    <div class="modal__body" id="modal-body"></div>
+
+    <div class="modal__foot">
+      <span class="console__note">FICTIONAL DEMO PROFILE</span>
+      <button class="btn" type="button" id="modal-cta">Contact donor</button>
+    </div>
+   </div>
+</div>
+
+<!-- ========================= hospital detail modal ===================== -->
+<div class="modal" id="hospital-modal" role="dialog" aria-modal="true" aria-labelledby="hmodal-name">
+  <div class="modal__backdrop"></div>
+  <div class="modal__dialog">
+    <button class="modal__close" id="hmodal-close" aria-label="Close hospital details">
+      <svg class="ico" aria-hidden="true"><use href="#i-close"></use></svg>
+    </button>
+    <div class="modal__head">
+      <span class="bg-mark bg-mark--lg"><svg class="ico" aria-hidden="true"><use href="#i-hospital"></use></svg></span>
+      <div>
+        <h2 id="hmodal-name" class="modal__name"></h2>
+        <p class="modal__loc" id="hmodal-loc"></p>
+        <p class="u-mt2 result-count" id="hmodal-verified"></p>
+      </div>
+    </div>
+    <div class="modal__body" id="hmodal-body"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- ============================== footer ============================== -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="#/home">
+          <svg class="brand__mark" viewBox="0 0 32 34" aria-hidden="true">
+            <path d="M16 2.2C16 2.2 4.6 14 4.6 21.2a11.4 11.4 0 0 0 22.8 0C27.4 14 16 2.2 16 2.2Z" fill="#B8173A" stroke="#FFF8F2" stroke-width="1.5"/>
+            <path d="M16 13.2 10.9 21.4M16 13.2l5.1 8.2M10.9 21.4h10.2" stroke="#F4CDD5" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="16" cy="13.2" r="2.7" fill="#FFF8F2"/>
+            <circle cx="10.9" cy="21.4" r="2.1" fill="#FFF8F2"/>
+            <circle cx="21.1" cy="21.4" r="2.1" fill="#FFF8F2"/>
+          </svg>
+          <span class="brand__name">BloodNet<span>BANGLADESH</span></span>
+        </a>
+        <p class="footer-tag">A proposed nationwide platform connecting recipients, voluntary donors and hospital blood banks.</p>
+        <p class="footer-quote">“Every Drop. Connected.”</p>
+      </div>
+
+      <div>
+        <h4>PLATFORM</h4>
+        <ul class="footer-list">
+          <li><a href="#/donors">Donor directory</a></li>
+          <li><a href="#/hospitals">Hospital blood banks</a></li>
+          <li><a href="#/emergency">Emergency requests</a></li>
+          <li><a href="#/register">Register as donor</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>SCOPE</h4>
+        <ul class="footer-list">
+          <li>Segment 1 — proposal, interface design and user flow</li>
+          <li>No backend or real-time hospital information yet</li>
+          <li>MySQL or MongoDB planned for Segment 2</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>PROJECT</h4>
+        <ul class="footer-list">
+          <li>Group 6 · Internet Programming</li>
+          <li>Ummay Salma · Muhchiou Sadia · Maska Jannat Anjila</li>
+          <li>Instructor: Avishek Chowdhury</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <span>ALL DONOR, HOSPITAL AND REQUEST DATA ON THIS SITE IS FICTIONAL SAMPLE DATA</span>
+      <span>PROTOTYPE CLOCK · <span data-today></span></span>
+    </div>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
