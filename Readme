@@ -1,0 +1,68 @@
+# BloodNet Bangladesh — Segment 1 prototype
+
+A nationwide blood donation and hospital blood-stock platform connecting recipients,
+voluntary donors and hospital blood banks.
+
+**Group 6 · Internet Programming** — Ummay Salma, Muhchiou Sadia, Maska Jannat Anjila
+Instructor: Avishek Chowdhury
+
+> All donor, hospital and request data in this prototype is **fictional sample data**.
+> Nothing here represents a real donor, hospital, stock level or blood request.
+
+## Running it
+
+No build step and no dependencies. Open `index.html` in a browser, or serve the folder:
+
+```bash
+python3 -m http.server 8000
+```
+
+For GitHub Pages, push this folder and enable Pages on the branch root.
+
+## Structure
+
+```
+index.html              markup for all six pages + the SVG icon sprite
+assets/css/bloodnet.css design tokens and every component style
+assets/js/data.js       the prototype dataset (shaped like the future DB tables)
+assets/js/app.js        router, filters, validation, modal, rendering
+```
+
+Pages are sections in `index.html` shown one at a time by a hash router
+(`#/home`, `#/donors`, `#/hospitals`, `#/emergency`, `#/register`, `#/donor/<id>`),
+so the browser back button works across the whole journey.
+
+## The prototype clock
+
+The sample records in the Segment 1 document are dated around late August 2026
+(stock verified 24–27 Aug, requests needed 30 Aug and 2 Sep). `BloodNet.meta.today`
+is therefore pinned to **2026-08-28** so cooldown dates, stock freshness and request
+urgency all stay consistent. Change that one value to move the whole prototype.
+
+## Derived rules, not stored values
+
+| Rule | Where |
+|---|---|
+| Donor availability = last donation + 3 months vs. today | `availability()` in `app.js` |
+| Stock status: 0 → OUT, 1–3 → LOW, 4+ → IN STOCK | `stockStatus()` in `app.js` |
+
+Storing only the raw facts (a date, a unit count) means Segment 2 can supply them
+from MySQL or MongoDB without changing any UI code.
+
+> The three-month cooldown is **proposed project logic, not medical clearance**.
+> Final donor eligibility must be confirmed by qualified healthcare professionals.
+
+## Planned database mapping (Segment 2)
+
+| Prototype collection | Future tables |
+|---|---|
+| `locations` | districts, upazilas, areas |
+| `donors` | users, donor_profiles, donation_history |
+| `hospitals` | hospitals, blood_stock (units + verification date) |
+| `requests` | emergency_requests, request_history |
+
+## Privacy
+
+Contact details are masked in the directory and released only from a donor profile,
+after an explicit action. In a live system that release would depend on sign-in and
+the donor's own consent settings, and would be logged.
